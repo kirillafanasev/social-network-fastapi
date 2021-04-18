@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+{% if user %}
+
+    <h1>Social Network</h1>
+    <h2>User Page</h2>
+    <ul>
+        <li>login - {% if user.login %}{{ user.login }}{% else %}Not defined{% endif %}</li>
+        <li>name - {% if user.name %}{{ user.name }}{% else %}Not defined{% endif %}</li>
+        <li>surname - {% if user.surname %}{{ user.surname }}{% else %}Not defined{% endif %}</li>
+        <li>age - {% if user.age %}{{ user.age }}{% else %}Not defined{% endif %}</li>
+        <li>sex - {% if user.sex %}{{ user.sex }}{% else %}Not defined{% endif %}</li>
+        <li>hobbies - {% if user.hobbies %}{{ user.hobbies }}{% else %}Not defined{% endif %}</li>
+        <li>city - {% if user.city %}{{ user.city }}{% else %}Not defined{% endif %}</li>
+    </ul>
+    <h3>Friends</h3>
+    {% if friends %}
+        {% for friend in friends %}
+            <ul>
+                <li>UserName - {% if friend.login %}{{ friend.login }}{% else %}Not defined{% endif %}</li>
+                <li>Name - {% if friend.name %}{{ friend.name }}{% else %}Not defined{% endif %}</li>
+                <li>Surname - {% if friend.surname %}{{ friend.surname }}{% else %}Not defined{% endif %}</li>
+            </ul>
+            <hr>
+        {% endfor %}
+    {% else %}
+        <div>No friends yet</div>
+    {% endif %}
+    <br>
+    <form action="/logout" method="get">
+        <button type="submit">Logout</button>
+    </form>
+    <form action="/register" method="get">
+        <button type="submit">Register</button>
+    </form>
+    <form action="/friends/find-friends" method="get">
+        <button type="submit">Find Friends</button>
+    </form>
+
+{% else %}
+
+    <h1>Social Network</h1>
+    <form action="/login" method="get">
+        <button type="submit">Login</button>
+    </form>
+    <form action="/register" method="get">
+        <button type="submit">Register</button>
+    </form>
+
+{% endif %}
+
+</body>
+</html>

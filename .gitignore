@@ -19,7 +19,6 @@ cmake*/
 
 # Cython (may need to disable .c if using C extensions directly)
 *.c
-*.html
 
 # Distribution / packaging
 .Python
