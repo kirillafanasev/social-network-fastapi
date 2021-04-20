@@ -1,12 +1,9 @@
 import fastapi
 from fastapi import Depends, Request, status
 from fastapi.responses import RedirectResponse
-from fastapi.templating import Jinja2Templates
 from app.auth.base import get_current_user
 from app.db.schemas import UserReturnSchema
 
-
-templates = Jinja2Templates(directory='templates')
 
 router = fastapi.APIRouter(prefix='/logout')
 

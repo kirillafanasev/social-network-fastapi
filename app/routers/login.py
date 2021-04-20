@@ -1,7 +1,6 @@
 import fastapi
 from fastapi import Depends, status
 from fastapi.responses import HTMLResponse, RedirectResponse
-from fastapi.templating import Jinja2Templates
 from jose import jwt
 from starlette.requests import Request
 from app.auth.base import check_encrypted_password
@@ -9,9 +8,8 @@ from app.db.crud import get_user_by_login
 from app.db.schemas import UserReturnSchema
 from app.config import settings
 from app.models.base import LoginForm
+from . import templates
 
-
-templates = Jinja2Templates(directory='templates')
 
 router = fastapi.APIRouter(prefix='/login')
 

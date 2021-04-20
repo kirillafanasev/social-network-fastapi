@@ -1,14 +1,13 @@
 import fastapi
 from fastapi import Depends, Request, status
 from fastapi.responses import HTMLResponse, RedirectResponse
-from fastapi.templating import Jinja2Templates
 from app.auth.base import get_current_user
 from app.db.crud import get_potential_friends, write_friend
 from app.db.schemas import UserReturnSchema
 from app.db.utils import prepare_users_to_form
 from app.models.base import UserAddFriendForm
+from . import templates
 
-templates = Jinja2Templates(directory='templates')
 
 router = fastapi.APIRouter(prefix='/friends')
 

@@ -1,13 +1,11 @@
 import fastapi
 from fastapi import Depends, Request
-from fastapi.templating import Jinja2Templates
 from app.auth.base import get_current_user
 from app.db.crud import get_existing_friends, get_user_by_id
 from app.db.schemas import UserReturnSchema
 from app.db.utils import prepare_users_to_form
+from . import templates
 
-
-templates = Jinja2Templates(directory='templates')
 
 router = fastapi.APIRouter()
 

@@ -1,15 +1,13 @@
 import fastapi
 from fastapi import Request, Depends, status
 from fastapi.responses import RedirectResponse
-from fastapi.templating import Jinja2Templates
 from jose import jwt
 from app.config import settings
 from app.db.crud import get_user_by_login, create_user
 from app.db.schemas import UserReturnSchema
 from app.models.base import RegisterForm
+from . import templates
 
-
-templates = Jinja2Templates(directory='templates')
 
 router = fastapi.APIRouter(prefix='/register')
 
