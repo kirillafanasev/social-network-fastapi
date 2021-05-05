@@ -1,9 +1,14 @@
+import pathlib
 from starlette.exceptions import HTTPException as StarletteHTTPException
 from fastapi import status, FastAPI
 from fastapi.exception_handlers import http_exception_handler
 from fastapi.templating import Jinja2Templates
 
-templates = Jinja2Templates(directory='templates')
+app_path = pathlib.Path(__file__).parent.parent.absolute()
+print(app_path)
+template_path = (app_path / 'templates').absolute()
+
+templates = Jinja2Templates(directory=template_path)
 
 
 def register_handlers(app: FastAPI):
