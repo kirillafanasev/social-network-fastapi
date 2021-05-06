@@ -17,7 +17,7 @@ async def index(
     return templates.TemplateResponse('index.html', {'request': request})
 
 
-@router.get('/home')
+@router.get('/home/')
 async def home(
         request: Request,
         current_user: UserReturnSchema = Depends(get_current_user)
@@ -29,7 +29,7 @@ async def home(
     friends_db = await get_existing_friends(database, current_user.id)
     friends = prepare_users_to_form(friends_db)
 
-    return templates.TemplateResponse(
+    resp = templates.TemplateResponse(
         'home.html',
         {
             'request': request,
@@ -37,3 +37,6 @@ async def home(
             'friends': friends,
         }
     )
+    resp.headers['Cache-Control'] = 'no-store'
+
+    return resp
