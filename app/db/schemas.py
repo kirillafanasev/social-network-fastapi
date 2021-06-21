@@ -7,7 +7,7 @@ class UserBaseSchema(BaseModel):
     name: str
     surname: str
     age: Optional[int] = None
-    sex: str
+    gender: str
     hobbies: str
     city: str
 

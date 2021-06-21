@@ -70,7 +70,7 @@ async def create_user(db: Database, user: RegisterForm):
         name=user.name,
         surname=user.surname,
         age=user.age,
-        sex=user.sex,
+        gender=user.gender,
         hobbies=user.hobbies,
         city=user.city
     )

@@ -9,7 +9,10 @@
 <h1>Social Network</h1>
 
 {% if user %}
-
+    <form action="/home/" method="get">
+        <button type="submit">Home</button>
+    </form>
+    <br>
     <h2>Find Friends</h2>
 
     {% for friend in potential_friends %}
@@ -26,10 +29,6 @@
         <hr>
 
     {% endfor %}
-    <br>
-    <form action="/home/" method="get">
-        <button type="submit">Home</button>
-    </form>
 
 {% else %}
     <h2>Please login to add friends</h2>

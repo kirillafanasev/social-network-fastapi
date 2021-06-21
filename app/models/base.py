@@ -14,7 +14,7 @@ class RegisterForm(BaseModel):
     name: Optional[str] = ''
     surname: Optional[str] = ''
     age: Optional[int] = None
-    sex: Optional[str] = ''
+    gender: Optional[str] = ''
     hobbies: Optional[str] = ''
     city: Optional[str] = ''
 
@@ -26,7 +26,7 @@ class RegisterForm(BaseModel):
         name: Optional[str] = Form(''),
         surname: Optional[str] = Form(''),
         age: Optional[int] = Form(None),
-        sex: Optional[str] = Form(''),
+        gender: Optional[str] = Form(''),
         hobbies: Optional[str] = Form(''),
         city: Optional[str] = Form('')
     ):
@@ -36,7 +36,7 @@ class RegisterForm(BaseModel):
             name=name,
             surname=surname,
             age=age,
-            sex=sex,
+            gender=gender,
             hobbies=hobbies,
             city=city
         )
