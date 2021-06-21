@@ -1,8 +1,8 @@
-"""Added user_table and user_friend tables
+"""add user and user friend tables
 
-Revision ID: 07e00d5dcf59
+Revision ID: 001
 Revises: 
-Create Date: 2021-04-14 22:50:54.686540
+Create Date: 2021-05-27 22:26:14.730406
 
 """
 from alembic import op
@@ -25,7 +25,7 @@ def upgrade():
     sa.Column('name', sa.String(length=255), nullable=False),
     sa.Column('surname', sa.String(length=255), nullable=False),
     sa.Column('age', sa.Integer(), nullable=True),
-    sa.Column('sex', sa.String(length=255), nullable=False),
+    sa.Column('gender', sa.String(length=255), nullable=False),
     sa.Column('hobbies', sa.TEXT(), nullable=False),
     sa.Column('city', sa.String(length=255), nullable=False),
     sa.PrimaryKeyConstraint('id'),

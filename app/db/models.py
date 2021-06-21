@@ -15,7 +15,7 @@ user_table = Table(
     Column('name', String(255), nullable=False, default=''),
     Column('surname', String(255), nullable=False, default=''),
     Column('age', Integer, nullable=True),
-    Column('sex', String(255), nullable=False, default=''),
+    Column('gender', String(255), nullable=False, default=''),
     Column('hobbies', TEXT, nullable=False, default=''),
     Column('city', String(255), nullable=False, default=''),
 )
