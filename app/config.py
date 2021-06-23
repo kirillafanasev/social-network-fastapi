@@ -7,6 +7,7 @@ class Settings(BaseSettings):
     SECRET_KEY = os.environ.get('SECRET_KEY', 'verysecretkey')
     ALGORITHM = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES = 30
+    POTENTIAL_FRIENDS_PER_PAGE = 20
 
 
 settings = Settings()

@@ -4,6 +4,7 @@ from sqlalchemy.sql import select
 from typing import List
 from databases import Database
 from app.auth.base import encrypt_password
+from app.config import settings
 from app.models.base import RegisterForm
 from .models import user_table, user_friend
 
@@ -40,8 +41,17 @@ async def get_existing_friends(
 
 async def get_potential_friends(
         db: Database,
-        user_id: int
+        user_id: int,
+        page: int = 0
 ) -> List[Mapping]:
+    """
+    Find potential friends. Return no more than POTENTIAL_FRIENDS_PER_PAGE
+    :param db:
+    :param user_id:
+    :param page:
+    :return:
+    """
+    page_size = settings.POTENTIAL_FRIENDS_PER_PAGE
 
     existing_friends = await get_existing_friends_ids(db, user_id)
     existing_friends_ids = [f[0] for f in existing_friends]
@@ -50,7 +60,12 @@ async def get_potential_friends(
             [existing_friends_ids, [user_id]]
         )
     )
-    query = user_table.select().where(user_table.c.id.notin_(exclude_user_ids))
+
+    query = user_table.select().\
+        where(user_table.c.id.notin_(exclude_user_ids)).\
+        limit(page_size). \
+        offset(page * page_size)
+
     return await db.fetch_all(query)
 
 
