@@ -13,7 +13,19 @@
         <button type="submit">Home</button>
     </form>
     <br>
+
     <h2>Find Friends</h2>
+
+    <form action="/friends/find-users-name-surname" method="post" accept-charset="utf-8" enctype="application/x-www-form-urlencoded">
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" value="" placeholder="Name" autofocus>
+        <label for="surname">Surname</label>
+        <input id="surname" name="surname" type="text" value="" placeholder="Surname">
+        <input type="submit" value="Find Friends"/>
+    </form>
+    <br>
+
+    <h2>Potential Friends</h2>
 
     {% for friend in potential_friends %}
 

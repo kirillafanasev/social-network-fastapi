@@ -1,11 +1,11 @@
 from aiomysql.sa.result import Mapping
 from itertools import chain
-from sqlalchemy.sql import select
+from sqlalchemy.sql import select, and_
 from typing import List
 from databases import Database
 from app.auth.base import encrypt_password
 from app.config import settings
-from app.models.base import RegisterForm
+from app.models.base import RegisterForm, NameSurnameForm
 from .models import user_table, user_friend
 
 
@@ -45,7 +45,8 @@ async def get_potential_friends(
         page: int = 0
 ) -> List[Mapping]:
     """
-    Find potential friends. Return no more than POTENTIAL_FRIENDS_PER_PAGE
+    Find potential friends
+    Return no more than POTENTIAL_FRIENDS_PER_PAGE
     :param db:
     :param user_id:
     :param page:
@@ -63,6 +64,42 @@ async def get_potential_friends(
 
     query = user_table.select().\
         where(user_table.c.id.notin_(exclude_user_ids)).\
+        limit(page_size). \
+        offset(page * page_size)
+
+    return await db.fetch_all(query)
+
+
+async def get_users_by_name_surname(
+        db: Database,
+        user_id: int,
+        name_surname: NameSurnameForm,
+        page: int = 0
+):
+    """
+    Find potential friends by prefix of name and surname
+    Order by users.id
+    Return no more than POTENTIAL_FRIENDS_PER_PAGE
+    Do not include existing friends and user himself
+    """
+    page_size = settings.POTENTIAL_FRIENDS_PER_PAGE
+
+    existing_friends = await get_existing_friends_ids(db, user_id)
+    existing_friends_ids = [f[0] for f in existing_friends]
+    exclude_user_ids = list(
+        chain.from_iterable(
+            [existing_friends_ids, [user_id]]
+        )
+    )
+
+    name = name_surname.name
+    surname = name_surname.surname
+    query = user_table.select().\
+        where(and_(
+            user_table.c.name.like(f"{name}%"),
+            user_table.c.surname.like(f"{surname}%"),
+            user_table.c.id.notin_(exclude_user_ids))).\
+        order_by(user_table.c.id). \
         limit(page_size). \
         offset(page * page_size)
 

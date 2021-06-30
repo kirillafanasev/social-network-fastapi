@@ -69,3 +69,21 @@ class UserAddFriendForm(BaseModel):
         return cls(
             friend_id=friend_id
         )
+
+
+class NameSurnameForm(BaseModel):
+    name: Optional[str] = ''
+    surname: Optional[str] = ''
+
+    @classmethod
+    def as_form(
+        cls,
+        name: Optional[str] = Form(''),
+        surname: Optional[str] = Form('')
+    ):
+        name = name.strip()
+        surname = surname.strip()
+        return cls(
+            name=name,
+            surname=surname
+        )
