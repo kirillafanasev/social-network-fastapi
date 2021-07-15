@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from db.database import database
 from app.exceptions.handlers import register_handlers
 from routers import home, login, register, find_friends, logout
+from api.v1 import find_friends as api_v1_find_friends
 
 
 def get_application() -> FastAPI:
@@ -21,6 +22,7 @@ def get_application() -> FastAPI:
     application.include_router(register.router)
     application.include_router(find_friends.router)
     application.include_router(logout.router)
+    application.include_router(api_v1_find_friends.router)
 
     register_handlers(application)
 

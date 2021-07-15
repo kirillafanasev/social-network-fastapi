@@ -1,5 +1,6 @@
 from sqlalchemy import (
-    Column, TEXT, Integer, String, MetaData, Table, ForeignKey, UniqueConstraint
+    Column, TEXT, Integer, String, MetaData, Table, ForeignKey, Index, func,
+    UniqueConstraint
 )
 
 
@@ -20,6 +21,11 @@ user_table = Table(
     Column('city', String(255), nullable=False, default=''),
 )
 
+Index(
+    'idx_users_name_surname',
+    func.lower(user_table.c.name),
+    func.lower(user_table.c.surname)
+)
 
 user_friend = Table(
     'user_friends',
